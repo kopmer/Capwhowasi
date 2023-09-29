@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 import './App.css';
-import KcfApp from './components/KcfApp/KcfApp';
+import KcfApp from './components/Kcf/KcfApp';
 function App() {
   return (
     <div className="App">
