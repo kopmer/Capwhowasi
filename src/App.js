@@ -13,6 +13,7 @@ function App() {
           <Routes>
             <Route path="/" element={<KcfApp/>}></Route>
             <Route path="/UploadPage" element={<UploadPage/>}></Route>
+            <Route path="/resultPage" element={<resultPage/>}></Route>
           </Routes>
         </BrowserRouter>
         <Footer/>

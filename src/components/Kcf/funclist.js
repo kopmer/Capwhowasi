@@ -7,6 +7,9 @@ function Button(props) {
     )
 }
 
+function UploadPic(){
+    const [preview, setPreview] = useState('')
+}
 function Navbar() {
     return (
         <header>

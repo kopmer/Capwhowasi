@@ -18,15 +18,3 @@
   background-color: #0056b3;
 }
 
-.signup_profileImg_label {
-  margin: 5px 0 20px 0;
-  font-weight: bold;
-  font-size: 13px;
-  color: #0095f6;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.form_signup_input[type="file"] {
-  display: none;
-}
