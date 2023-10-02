@@ -1,10 +1,21 @@
 //import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import KcfApp from './components/Kcf/KcfApp';
+import Footer from './components/Kcf/Footer';
+import Header from './components/Kcf/Header';
+import KcfApp from './components/pages/KcfApp';
+import UploadPage from './components/pages/UploadPage';
 function App() {
   return (
     <div className="App">
-      <KcfApp />
+        <Header/>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<KcfApp/>}></Route>
+            <Route path="/UploadPage" element={<UploadPage/>}></Route>
+          </Routes>
+        </BrowserRouter>
+        <Footer/>
     </div>
   );
 }
