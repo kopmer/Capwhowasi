@@ -5,6 +5,7 @@ import Footer from './components/Kcf/Footer';
 import Header from './components/Kcf/Header';
 import KcfApp from './components/pages/KcfApp';
 import UploadPage from './components/pages/UploadPage';
+import ResultPage from  './components/pages/ResultPage';
 function App() {
   return (
     <div className="App">
@@ -13,7 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<KcfApp/>}></Route>
             <Route path="/UploadPage" element={<UploadPage/>}></Route>
-            <Route path="/resultPage" element={<resultPage/>}></Route>
+            <Route path="/ResultPage" element={<ResultPage/>}></Route>
           </Routes>
         </BrowserRouter>
         <Footer/>
