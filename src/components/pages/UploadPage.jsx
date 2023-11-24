@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import * as tmImage from '@teachablemachine/image';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
 import { Button } from "../Kcf/funclist";
 import styles from "../Kcf/KcfApp.module.css";
 const UploadePage = () => {
   const URL = "https://teachablemachine.withgoogle.com/models/PyhHnKSa0/";
 
-=======
-
-const UploadePage = () => {
-  const URL = "https://teachablemachine.withgoogle.com/models/PyhHnKSa0/";
-
->>>>>>> 3c7486119ad9900bde5af39d2c2fc8973865e9f4
   const [model, setModel] = useState(null);
   const [labelContainer, setLabelContainer] = useState(null);
   const [maxPredictions, setMaxPredictions] = useState(null);
@@ -108,19 +101,10 @@ const UploadePage = () => {
 
       {imageUploaded && (
         <>
-<<<<<<< HEAD
           <Button label="분석하기" styleClass ={styles.start_btn} onClick={predict}>
           </Button>
           <Button label="이미지 제거" styleClass = {styles.start_btn} onClick={removeImage}>
           </Button>
-=======
-          <button type="button" onClick={predict}>
-            분석하기
-          </button>
-          <button type="button" onClick={removeImage}>
-            이미지 제거
-          </button>
->>>>>>> 3c7486119ad9900bde5af39d2c2fc8973865e9f4
         </>
       )}
 
