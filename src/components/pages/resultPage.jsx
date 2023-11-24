@@ -1,12 +1,27 @@
-import React from "react";
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
-function resultPage() {
-    return (
-        <div className="App">
-            
-            
-        </div>
-    )
-}
+const ResultPage = () => {
+  const location = useLocation();
+  const results = location.state?.results || [];
 
-export default resultPage;
+  return (
+    <div>
+      <h2>Result Page</h2>
+      <div>
+        {results.length > 0 ? (
+          <div>
+            <h3>Results:</h3>
+            {results.map((result, index) => (
+              <div key={index}>{result}</div>
+            ))}
+          </div>
+        ) : (
+          <p>No results available.</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ResultPage;
