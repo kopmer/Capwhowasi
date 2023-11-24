@@ -1,74 +1,69 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import * as tmImage from '@teachablemachine/image';
 import { useNavigate } from 'react-router-dom';
-
+import { Button } from "../Kcf/funclist";
+import styles from "../Kcf/KcfApp.module.css";
 const UploadePage = () => {
   const URL = "https://teachablemachine.withgoogle.com/models/PyhHnKSa0/";
-  let model, labelContainer, maxPredictions;
 
+  const [model, setModel] = useState(null);
+  const [labelContainer, setLabelContainer] = useState(null);
+  const [maxPredictions, setMaxPredictions] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
   const [analyzing, setAnalyzing] = useState(false);
   const [results, setResults] = useState([]);
+  const [imageUploaded, setImageUploaded] = useState(false); // Track whether an image is uploaded
 
   const navigate = useNavigate();
 
   useEffect(() => {
     init();
   }, []);
-
-  async function init() {
+  
+  const init = async () => {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
-    model = await tmImage.load(modelURL, metadataURL);
-    maxPredictions = model.getTotalClasses();
-    labelContainer = document.getElementById("label-container");
-
-    if (labelContainer) {
-      for (let i = 0; i < maxPredictions; i++) {
-        labelContainer.appendChild(document.createElement("div"));
-      }
-    } else {
-      console.error("labelContainer is null");
-    }
-  }
-
-  function previewImage() {
+    const loadedModel = await tmImage.load(modelURL, metadataURL);
+    setModel(loadedModel);
+    setMaxPredictions(loadedModel.getTotalClasses());
+    setLabelContainer(document.getElementById("label-container"));
+  };
+  //이미지 미리보기
+  const previewImage = () => {
     const fileInput = document.getElementById('face_image');
     const img = document.getElementById('preview');
-
     const file = fileInput.files[0];
+
     if (file) {
       const reader = new FileReader();
-      reader.onload = function (e) {
+      reader.onload = (e) => {
         img.src = e.target.result;
+        setImageUploaded(true); // Set the state to indicate image upload
       };
       reader.readAsDataURL(file);
     }
-  }
-
-  async function predictWithRetry(retryCount) {
+  };
+  //분석후 결과중 가장 일치도가 높은 결과의 이름과 일치도를 전달
+  const predictWithRetry = async (retryCount) => {
     try {
-      setAnalyzing(true);
-  
       const img = document.getElementById("preview");
-  
       const prediction = await model.predict(img, false);
-  
-      // Find the class information with the highest probability
+
       const highestProbabilityClass = prediction.reduce((prev, current) =>
         prev.probability > current.probability ? prev : current
       );
-  
-      const classPrediction = `${highestProbabilityClass.className}: ${highestProbabilityClass.probability.toFixed(2)}`;
-  
+
+      const className = highestProbabilityClass.className;
+      const probability = highestProbabilityClass.probability.toFixed(2);
+      const classPrediction = `${className}: ${probability}`;
+      
       labelContainer.innerHTML = classPrediction;
-      setResults([classPrediction]);
+      setResults([{ className, probability }]);
   
-      // 결과값 전달
-      navigate("/ResultPage", { state: { results: [classPrediction] } });
-      console.log(results);
+      navigate("/ResultPage", { state: { results: [{ className, probability }] } });
+      
     } catch (error) {
+      setAnalyzing(true);
       if (retryCount < 5) {
         setRetryCount(retryCount + 1);
         setTimeout(() => predictWithRetry(retryCount + 1), 1000);
@@ -79,30 +74,39 @@ const UploadePage = () => {
     } finally {
       setAnalyzing(false);
     }
-  }
+  };
+  //분석중 띄우기위해 1초후 분석
+  const predict = () => {
+    setAnalyzing(true);
+    setTimeout(() => predictWithRetry(0), 1000);
+  };
 
-  const predict = () => predictWithRetry(0);
-
+  //이미지 제거
   const removeImage = () => {
     setAnalyzing(false);
     setRetryCount(0);
     const img = document.getElementById('preview');
     img.src = "";
-
     labelContainer.innerHTML = "";
     setResults([]);
+    setImageUploaded(false); // 업로드상태 false
+  
+    // Reset the file input
+    const fileInput = document.getElementById('face_image');
+    fileInput.value = null;
   };
-
   return (
     <div>
       <div>Teachable Machine Image Model</div>
 
-      <button type="button" onClick={predict}>
-        분석하기
-      </button>
-      <button type="button" onClick={removeImage}>
-        이미지 제거
-      </button>
+      {imageUploaded && (
+        <>
+          <Button label="분석하기" styleClass ={styles.start_btn} onClick={predict}>
+          </Button>
+          <Button label="이미지 제거" styleClass = {styles.start_btn} onClick={removeImage}>
+          </Button>
+        </>
+      )}
 
       <form id="form1">
         <label htmlFor="face_image" className="custom-file-upload">
