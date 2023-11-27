@@ -16,21 +16,21 @@ const ResultPage = () => {
             일치도 <strong>{result.probability*100}%</strong>
             
             {/* 각 클래스에 따라 다른 텍스트 출력 */}
-            {result.className === '도산 안창호' && (
+            {result.className === '안창호' && (
               <div>
                 <p>우리가 세운 목적이 그른 것이라면 언제든지 실패할 것이요, 우리가 세운 목적이 옳은 것이면 언제든지 성공할 것이다.</p>
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} className ="resultImg" src={process.env.PUBLIC_URL + '/도산안창호.jpg'}/>
               </div>
             )}
 
-            {result.className === '이순신 장군' && (
+            {result.className === '이순신' && (
               <div>
                 <p>반드시 죽고자 하는 자는 살고 반드시 살고자 하는 자는 죽을 것이다.(必死卽生 必生卽死)</p>
-                <img alt="이순신" src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
 
-            {result.className === '윤봉길 의사' && (
+            {result.className === '윤봉길' && (
               <div>
                 <p>사람은 왜 사느냐 이상을 이루기 위하여 산다
 
@@ -56,6 +56,120 @@ const ResultPage = () => {
                 그 강의한 사랑을 따르기로 결심하여 이 길을 택하였다.</p>
                 <img alt={process.env.PUBLIC_URL + '/디폴트.png'} className ="resultImg" src={process.env.PUBLIC_URL + '/윤봉길의사.jpg'}/>
 
+              </div>
+            )}
+            {result.className === '김시민' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '서희' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '세종대왕' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '율곡이이' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '장영실' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '정도전' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '태종' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '퇴계이황' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '허난설현' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '황희' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '민영주' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '김구' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '서재필' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '유관순' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '윤희순' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '이봉창' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '한용운' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '현덕신' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+              </div>
+            )}
+            {result.className === '김마리아' && (
+              <div>
+                <p>추가예정</p>
+                <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
           </div>
