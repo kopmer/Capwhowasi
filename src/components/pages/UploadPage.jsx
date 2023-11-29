@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "../Kcf/funclist";
 import styles from "../Kcf/KcfApp.module.css";
 const UploadePage = () => {
-  const URL = "https://teachablemachine.withgoogle.com/models/PyhHnKSa0/";
+  const URL = "https://teachablemachine.withgoogle.com/models/sSCTetSMm/";
 
   const [model, setModel] = useState(null);
   const [labelContainer, setLabelContainer] = useState(null);
