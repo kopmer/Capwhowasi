@@ -3,6 +3,7 @@ import * as tmImage from '@teachablemachine/image';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "../Kcf/funclist";
 import styles from "../Kcf/KcfApp.module.css";
+import "../Kcf/UploadPage.css";
 const UploadePage = () => {
   const URL = "https://teachablemachine.withgoogle.com/models/sSCTetSMm/";
 
@@ -60,15 +61,15 @@ const UploadePage = () => {
       labelContainer.innerHTML = classPrediction;
       setResults([{ className, probability }]);
   
-      navigate("/ResultPage", { state: { results: [{ className, probability }] } });
+      navigate("/ResultPage", { state: { results: [{ className, probability }], imageData: img.src } });
       
     } catch (error) {
       setAnalyzing(true);
-      if (retryCount < 5) {
+      if (retryCount < 10) {
         setRetryCount(retryCount + 1);
         setTimeout(() => predictWithRetry(retryCount + 1), 1000);
       } else {
-        console.error('5번의 재시도 후 분석 실패');
+        console.error('재시도 요청');
         setRetryCount(0);
       }
     } finally {
@@ -83,45 +84,48 @@ const UploadePage = () => {
 
   //이미지 제거
   const removeImage = () => {
-    setAnalyzing(false);
-    setRetryCount(0);
     const img = document.getElementById('preview');
-    img.src = "";
-    labelContainer.innerHTML = "";
-    setResults([]);
-    setImageUploaded(false); // 업로드상태 false
+    img.src = process.env.PUBLIC_URL + '/디폴트.jpg';
   
-    // Reset the file input
-    const fileInput = document.getElementById('face_image');
-    fileInput.value = null;
+    setImageUploaded(false); // 업로드상태 false
   };
   return (
-    <div>
-      <div>Teachable Machine Image Model</div>
+    <div className='upload_container'>
+      <div className='upload_top'></div>
+      {imageUploaded || (
+        <div className='upload_text'>업로드를 눌러 자신의 사진을 등록해주세요.</div>
+      )}
 
-      {imageUploaded && (
+      <div className='picBox'>
+        <img
+          id="preview"
+          alt="img"
+          src={process.env.PUBLIC_URL + '/디폴트.jpg'}
+        />
+      </div>
+
+      {imageUploaded && !analyzing && (
         <>
-          <Button label="분석하기" styleClass ={styles.start_btn} onClick={predict}>
+          <Button label="이미지 제거🚮" styleClass={styles.del_btn} onClick={removeImage}>
           </Button>
-          <Button label="이미지 제거" styleClass = {styles.start_btn} onClick={removeImage}>
+          <Button label="분석하기🔍" styleClass={styles.anly_btn} onClick={predict}>
           </Button>
+          
         </>
       )}
 
-      <form id="form1">
-        <label htmlFor="face_image" className="custom-file-upload">
-          <i className="fa fa-cloud-upload"></i>
-        </label>
-        <input type="file" id="face_image" onChange={previewImage} />
-      </form>
-      <img
-        id="preview"
-        alt="Preview"
-        src=""
-        style={{ maxWidth: '300px', marginTop: '10px' }}
-      />
-
-      {analyzing && <p>분석 중...</p>}
+      {imageUploaded || (
+        <form id="form1">
+          <label htmlFor="face_image" className="custom_file_upload">
+            📸업로드
+          </label>
+          <input type="file" id="face_image" onChange={previewImage} style={{ display: "none" }} />
+        </form>
+      )}
+      <div className='anly_container'>
+        {analyzing && <p className='analyzing'>분석 중...🔍</p>}
+      </div>
+      
 
       <div id="label-container"></div>
     </div>

@@ -1,180 +1,186 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-
-
+import "../Kcf/ResultPage.css"
+import { Button } from '../Kcf/funclist';
+import styles from "../Kcf/KcfApp.module.css";
 const ResultPage = () => {
   // 이전에 분석된 결과를 가져옴
-  const results = useLocation().state.results;
+  const { results, imageData } = useLocation().state;
+  const handleSearch = () => {
+    // result.className을 검색어로 사용하여 네이버 검색 페이지로 이동
+    window.open(`https://search.naver.com/search.naver?query=${encodeURIComponent(results[0].className)}`);
+  };
 
   return (
-    <div>
-      <h2>분석 결과</h2>
-      <ul>
+    <div className='result_container'>
+      <div className='img_container'>
+        
+          
         {results.map((result, index) => (
           <div key={index}>
-            <b>당신과 닮은 인물은...</b> <br></br>{result.className}<br />
-            일치도 <strong>{result.probability*100}%</strong>
+            <div className='result_top'>
+              <p className='title_text'>
+                  당신과 닮은 인물은...
+              </p> 
+            </div>
+            
+            <div className='match_rate'>
+              
+              {result.className}<br/>
+              <strong>{Math.round(result.probability*100)}%</strong>
+              </div>
             
             {/* 각 클래스에 따라 다른 텍스트 출력 */}
             {result.className === '안창호' && (
               <div>
-                <p>우리가 세운 목적이 그른 것이라면 언제든지 실패할 것이요, 우리가 세운 목적이 옳은 것이면 언제든지 성공할 것이다.</p>
+                <img src={imageData} alt="User Uploaded" />
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} className ="resultImg" src={process.env.PUBLIC_URL + '/도산안창호.jpg'}/>
+                <p>우리가 세운 목적이 그른 것이라면 언제든지 실패할 것이요, 우리가 세운 목적이 옳은 것이면 언제든지 성공할 것이다.</p>
+                
               </div>
             )}
 
             {result.className === '이순신' && (
               <div>
-                <p>반드시 죽고자 하는 자는 살고 반드시 살고자 하는 자는 죽을 것이다.(必死卽生 必生卽死)</p>
+                <img src={imageData} alt="User Uploaded" />
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+                <p>반드시 죽고자 하는 자는 살고 반드시 살고자 하는 자는 죽을 것이다.(必死卽生 必生卽死)</p>
               </div>
             )}
 
             {result.className === '윤봉길' && (
               <div>
-                <p>사람은 왜 사느냐 이상을 이루기 위하여 산다
-
-
-                보라 물은 꽃을 피우고 나무는 열매를 맺는다.
-              
-              
-                나도 이상의 꽃을 피우고 열매를 맺기를 다짐하였다.
-              
-              
-                우리 청년 시대에는 부모의 사랑보다 형제의 사랑보다
-              
-              
-                처자의 사랑보다도 더 한층 강의한 사랑이 있는 것을
-              
-              
-                깨달았다. 나라와 겨례에 바치는 뜨거운 사랑이다.
-                
-                
-                나의 우로와 나의 강산과 나의 부모를 버리고라도
-                
-                
-                그 강의한 사랑을 따르기로 결심하여 이 길을 택하였다.</p>
-                <img alt={process.env.PUBLIC_URL + '/디폴트.png'} className ="resultImg" src={process.env.PUBLIC_URL + '/윤봉길의사.jpg'}/>
+       
+                <img alt={process.env.PUBLIC_URL + '/디폴트.png'} src={process.env.PUBLIC_URL + '/윤봉길의사.jpg'}/>
 
               </div>
             )}
             {result.className === '김시민' && (
               <div>
-                <p>추가예정</p>
+              
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '서희' && (
               <div>
-                <p>추가예정</p>
+          
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '세종대왕' && (
               <div>
-                <p>추가예정</p>
+                
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '율곡이이' && (
               <div>
-                <p>추가예정</p>
+              
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '장영실' && (
               <div>
-                <p>추가예정</p>
+              
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '정도전' && (
               <div>
-                <p>추가예정</p>
+            
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '태종' && (
               <div>
-                <p>추가예정</p>
+            
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '퇴계이황' && (
               <div>
-                <p>추가예정</p>
+                
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '허난설현' && (
               <div>
-                <p>추가예정</p>
+                
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '황희' && (
               <div>
-                <p>추가예정</p>
+                
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '민영주' && (
               <div>
-                <p>추가예정</p>
+             
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '김구' && (
               <div>
-                <p>추가예정</p>
+                
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '서재필' && (
               <div>
-                <p>추가예정</p>
+                
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '유관순' && (
               <div>
-                <p>추가예정</p>
+                
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '윤희순' && (
               <div>
-                <p>추가예정</p>
+                
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '이봉창' && (
               <div>
-                <p>추가예정</p>
+                
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '한용운' && (
               <div>
-                <p>추가예정</p>
+                
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '현덕신' && (
               <div>
-                <p>추가예정</p>
+                
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
               </div>
             )}
             {result.className === '김마리아' && (
               <div>
-                <p>추가예정</p>
+                <img src={imageData} alt="User Uploaded" />
                 <img alt={process.env.PUBLIC_URL +'/디폴트.jpg'} src={process.env.PUBLIC_URL + '/이순신.jpg'}/>
+                
+                
               </div>
             )}
+            
           </div>
         ))}
-      </ul>
+        
+        
+      </div>
+      <div className='search_container'>
+        <Button onClick={handleSearch} styleClass={styles.start_btn} label="인물 검색"></Button>
+      </div>
+      
     </div>
   );
 };

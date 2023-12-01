@@ -1,0 +1,53 @@
+.homeContainer{
+    height: 100%;
+    padding: 5px;
+    
+}
+.topBox{
+    height: 80px;
+}
+img {
+    
+    border-radius: 15px;
+}
+.homeImg{
+    height: 300px;
+    max-width: 300px;
+}
+.imgBox{
+    max-height: 250px;
+}
+.bottomBox{
+    height: 50px;
+}
+
+.topp{
+    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-right: 130px;
+    font-size: 20px;
+    
+    font-family: cursive;
+    color: #fefefe;
+}
+.botp{
+    margin-top: 5px;
+    margin-bottom: 20px;
+    margin-right: 190px;
+    font-size: 20px;
+    
+    font-family: cursive;
+    color: #fefefe;
+}
+
+
+.btn_container{
+    padding: 20px;
+    margin-top: 30px;
+}
+.btnBox{
+    padding: 10px;
+    background:linear-gradient(rgb(4, 4, 39), rgb(0, 8, 51));
+    border-radius: 15px;
+}
+

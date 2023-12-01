@@ -21,8 +21,10 @@ function App() {
             <Route path="/ListPage" element={<ListPage/>}></Route>
           </Routes>
         </BrowserRouter>
-        <Footer/>
+        <Footer></Footer>
     </div>
+    
+    
   );
 }
 
