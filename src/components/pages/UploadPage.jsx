@@ -5,15 +5,16 @@ import { Button } from "../Kcf/funclist";
 import styles from "../Kcf/KcfApp.module.css";
 import "../Kcf/UploadPage.css";
 const UploadePage = () => {
-  const URL = "https://teachablemachine.withgoogle.com/models/sSCTetSMm/";
+  const URL = "https://teachablemachine.withgoogle.com/models/ROxBFMZwA/";
+  const MAX_RETRIES = 10;
+  const ANALYSIS_DELAY = 1000;
 
   const [model, setModel] = useState(null);
   const [labelContainer, setLabelContainer] = useState(null);
-  const [maxPredictions, setMaxPredictions] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
-  const [analyzing, setAnalyzing] = useState(false);
+  const [analyzing, setAnalyzing] = useState(false);//분석중인지 아닌지
   const [results, setResults] = useState([]);
-  const [imageUploaded, setImageUploaded] = useState(false); // Track whether an image is uploaded
+  const [imageUploaded, setImageUploaded] = useState(false);//유저가 이미지 업로드 했는지 안했는지
 
   const navigate = useNavigate();
 
@@ -26,7 +27,6 @@ const UploadePage = () => {
     const metadataURL = URL + "metadata.json";
     const loadedModel = await tmImage.load(modelURL, metadataURL);
     setModel(loadedModel);
-    setMaxPredictions(loadedModel.getTotalClasses());
     setLabelContainer(document.getElementById("label-container"));
   };
   //이미지 미리보기
@@ -39,7 +39,7 @@ const UploadePage = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         img.src = e.target.result;
-        setImageUploaded(true); // Set the state to indicate image upload
+        setImageUploaded(true); // 이미지 업로드 상태 변경
       };
       reader.readAsDataURL(file);
     }
@@ -54,22 +54,21 @@ const UploadePage = () => {
         prev.probability > current.probability ? prev : current
       );
 
-      const className = highestProbabilityClass.className;
-      const probability = highestProbabilityClass.probability.toFixed(2);
-      const classPrediction = `${className}: ${probability}`;
-      
-      labelContainer.innerHTML = classPrediction;
+      const { className, probability } = highestProbabilityClass;
+      const classPrediction = `${className}: ${probability.toFixed(2)}`;
+
       setResults([{ className, probability }]);
-  
+      setLabelContainer(classPrediction);
+
       navigate("/ResultPage", { state: { results: [{ className, probability }], imageData: img.src } });
-      
+
     } catch (error) {
       setAnalyzing(true);
-      if (retryCount < 10) {
+      if (retryCount < MAX_RETRIES) {
         setRetryCount(retryCount + 1);
-        setTimeout(() => predictWithRetry(retryCount + 1), 1000);
+        setTimeout(() => predictWithRetry(retryCount + 1), ANALYSIS_DELAY);
       } else {
-        console.error('재시도 요청');
+        console.error('분석 중 오류 발생');
         setRetryCount(0);
       }
     } finally {
@@ -79,7 +78,7 @@ const UploadePage = () => {
   //분석중 띄우기위해 1초후 분석
   const predict = () => {
     setAnalyzing(true);
-    setTimeout(() => predictWithRetry(0), 1000);
+    setTimeout(() => predictWithRetry(0), ANALYSIS_DELAY);
   };
 
   //이미지 제거
@@ -103,8 +102,8 @@ const UploadePage = () => {
           src={process.env.PUBLIC_URL + '/디폴트.jpg'}
         />
       </div>
-
-      {imageUploaded && !analyzing && (
+    
+      {imageUploaded && !analyzing && (//이미지 업로드 상태에서만 버튼 보이게
         <>
           <Button label="이미지 제거🚮" styleClass={styles.del_btn} onClick={removeImage}>
           </Button>
@@ -114,7 +113,7 @@ const UploadePage = () => {
         </>
       )}
 
-      {imageUploaded || (
+      {imageUploaded || (//이미지 업로드 안했을때나 이미지 제거버튼 눌렀을때 다시 업로드할수 있게 업로드 버튼보임
         <form id="form1">
           <label htmlFor="face_image" className="custom_file_upload">
             📸업로드

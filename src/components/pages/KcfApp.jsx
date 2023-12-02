@@ -13,9 +13,6 @@ const KcfApp = () => {
                 <img alt = "startimg" src ={process.env.PUBLIC_URL + "/camera1280.jpg"} className="homeImg"/>
             </div>
             
-            
-            
-            
             <div className="btn_container">
                 <div className="btnBox">
                     <p className="topp">나랑 닮은 위인은 </p><p className="botp">누구일까?</p>
